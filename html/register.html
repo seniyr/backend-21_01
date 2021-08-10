@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="70641197957-nd352djh69dkqd4mhf5qj7nksd0r6tf2.apps.googleusercontent.com">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/css/register.css">
+    <script src="/static/assets/js/register.js" defer></script>
+
+</head>
+
+<body>
+    <form id="registerform">
+        <div class="container">
+            <div class="sign">SignUp</div>
+            <div class="username">Email</div>
+            <input type="email" name="email" required>
+            <div class="password" >Password</div>
+            <input id="pass" title="Must contain atleast one number, a lower case and atleast 6 characters" 
+            type="password" id="password-field" minlength="6" required pattern="(?=.*\d)(?=.*[a-z]).{5,}" name="password">
+            <div class="confirm">Confirm Password</div>
+            <input type="password" id="pass2" >
+
+            <button type="submit">SignUp</button>
+            <div class="break">---------------------------OR---------------------------</div>
+            <div id='images'>
+                <a href="/signin/auth/google" ><img  id = "googleimg" src="/static/images/google.png" alt="Google"></a>
+              <img id = "linkedinimg" src="/static/images/linkedin.png" alt="LinkedIn">
+              <img  id = "githubimg"src="/static/images/github.png" alt="Github" >
+
+            </div>
+            
+
+        </div>
+    </form>
+</body>
+
+</html>

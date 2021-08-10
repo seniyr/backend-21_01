@@ -44,82 +44,40 @@ document.getElementById('loginform').addEventListener('submit',async (e)=>{
         headers : {
             "Content-type":"application/json",
         },
-        body :JSON.stringify(useful_data)
+        body :JSON.stringify(useful_data),
+        Credential:'include'
     }
     var status ;
-    let loginmsg =await fetch("/login",options)
+    let redirect;
+    let responsedata =await fetch("/signin",options)
     .then( (res)=>{
         status = res.status;
-        return res.json()
+        console.log(res,'\n')
+        if(res.redirected){
+            redirect = res.url
+        }
+        return res;
     })
     .catch ((e)=>{
         console.log(e);
     });
 
-    console.log("LOGIN : \n ",loginmsg);
-    servermsg.value = loginmsg.message;
-    if(status == 200){
-        const {jwtoken} = loginmsg;
-        localStorage.setItem("Seniyr-token",jwtoken);
-        setTimeout(()=>{window.open("/Dashboard/");},1000)
-        // due to this, we cannot let dashboard not be static page.
-        
-        
-        
 
+    console.log("LOGIN : \n ",responsedata);
+    if(status == 401){ // passport standandard for unsucceful attempt on login. means wrong password or username
+        document.getElementsByClassName('user')[0].innerHTML  = `Email | <b>Wrong username or password</b>`   
     }
-
+    if(status==200){
+        document.getElementsByClassName('user')[0].innerHTML  = `Email | SUCESSFUL!`
+    }
+    if(redirect){
+        setTimeout(() => {
+            window.location.href = redirect;
+        }, 1000);
+    }
     return false;
 });
 
-document.getElementById('registerform').addEventListener('submit',async (e)=>{
-    e.preventDefault();
-    console.log(e.target)
-    let form =  e.target;
-    let data = {};
-    for(i=0 ; i<form.elements.length ;i++){
-        let input = form.elements[i]
-        if(input.name != "submit"){
-            data[input.name]  = input.value;
-
-        }
-    
-    }
-    // console.log(data);
-    useful_data = {};
-        const { name,email,gender,college,password,city} = data;
-        useful_data.name = name;
-        useful_data.email = email;
-        useful_data.gender = gender;
-        useful_data.college = college;
-        useful_data.password = password;
-        useful_data.city = city;
 
 
-    console.log(useful_data)
-    
-    let options = {
-        method :"POST",
-        headers : {
-            "Content-type":"application/json",
-        },
-        body : JSON.stringify(useful_data)
-    }
-    let status;
-    let registermsg =await fetch("/login/register",options)
-    .then( (res)=>{
-        status = res.status
-        return res.json()
-    } )
-    .catch ((e)=>{
-        console.log(e);
-    });
-
-    
-    console.log("RESGISTER",registermsg.message);
-    servermsg.value  = registermsg.message;
-    return false;
-});
-
- 
 console.log("hi")
