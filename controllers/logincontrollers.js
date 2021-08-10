@@ -2,13 +2,21 @@ const jwt = require('jsonwebtoken');
 
 
 module.exports.loginbypass = function loginbypass (req,res,next){
-    console.log('checking for bypass' , req.session)
-    if(req.session.passport.user) {
-        res.redirect('/user') ; 
+   
+    try{
+        if(req.session.passport.user) {
+            res.redirect('/user') ; 
+            console.log('checking for bypass' , req.session.passport.user)
+        }
+        else{
+            next();  
+        }
     }
-    else{
-        next();
+    catch(e){    
+           console.log(e);  
     }
+    
+   
 
 }; // authenticates the token. if not found. sends the login page. 
 //if found,send the payload in req.data to next
@@ -61,11 +69,15 @@ module.exports.errorhandler = async function errorhandler (err,req,res,next){
 
 
 module.exports.isAuth = (req, res, next) => {
-    console.log("checking.." ,req.session.passport.user )
-    if (req.session.passport.user) {
-        next();
-    } else {
-        res.redirect('/signin');
+    try{
+        if (req.session.passport.user) {
+            next();
+        }
+        else{
+            res.redirect('/signin')
+        }
+    } catch(e) {
+        console.log(e);
     }
 }
 

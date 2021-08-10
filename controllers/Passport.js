@@ -58,9 +58,9 @@ passport.deserializeUser((userIDandType, done) => { // this basicly on the basis
     // console.log("desearlising")
     let id = userIDandType.id;
     if(userIDandType.type == 'google'){
-        console.log("got google")
+        // console.log("got google")
         googleUser.findById(id).then((user)=>{
-            console.log("this is deseralised one", user)
+            // console.log("this is deseralised one", user)
             done(null,user);
         }).catch((e)=>{console.log(e)});
     }

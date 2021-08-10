@@ -3,7 +3,7 @@ const express   =require('express')
 const router = express.Router();
 const path = require('path')
 const connection = require('../database/scripts/mongo_init')
-require('../controllers/passportConfig')(router);
+
 const USER_PROFILE = connection.models.profile;
 const {
     Authenticator,
@@ -14,12 +14,10 @@ const {
     isAuth
 }  = require("../controllers/logincontrollers")
 
+require('../controllers/passportConfig')(router);
 
 
 
-
-var date = new Date();
-var last_login ;
 
 router.get("/" ,isAuth, async (req,res) =>{
     // console.log("THERE THERE",req.session.passport.user)
