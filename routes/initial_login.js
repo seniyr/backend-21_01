@@ -161,7 +161,7 @@ router.post('/register', async (req,res)=>{
                 const newprofile = new USER_PROFILE({
                     normaluserid :user.id,
                     name:'testing',
-                    email:user.email
+                    email:user.username
                 })
 
                 newprofile.save().then((profile)=>{
