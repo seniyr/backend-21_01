@@ -14,7 +14,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/signin/auth/google/callback",
+  callbackURL: `${process.env.GOOGLE_REDIRECT_URI}/signin/auth/google/callback`,
   passReqToCallback: true,
     }, // pass request to call back will eventualy pass the profile info we got toobject which is profile
 

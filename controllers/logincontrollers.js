@@ -13,7 +13,8 @@ module.exports.loginbypass = function loginbypass (req,res,next){
         }
     }
     catch(e){    
-           console.log(e);  
+        //    console.log(e); 
+           next(); 
     }
     
    
@@ -77,7 +78,8 @@ module.exports.isAuth = (req, res, next) => {
             res.redirect('/signin')
         }
     } catch(e) {
-        console.log(e);
+        // console.log(e);
+        res.redirect('/signin')
     }
 }
 
