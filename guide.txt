@@ -1,0 +1,17 @@
+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
+
+this is git private key.
+when we do 
+git set-url origin https:// username@token@github.com/repo.git
+
+just do this and push and pull becomes easy.
+
+
+in aws. let host be aws-server
+hostname can be ip or public hostname
+user can be ubuntu in most cases.
+and then just connect. 
+
+Remember that usualy, we need to remove all the groups and users from the file permitions of the 
+.pem file. so just remove inherited properties and then remove them, them only it will allow that key to be 
+used/
