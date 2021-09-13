@@ -44,23 +44,15 @@ app.use("/signin",initial_login);
 const user = require('./routes/user.js')
 app.use('/user',user)
 
+app.use('/react',(req, res, next) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 
 app.use(errorhandler);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-app.listen(3000, ()=>{
+app.listen(3001, ()=>{
     console.log("server started on port 3000")
 });
