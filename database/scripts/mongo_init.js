@@ -41,6 +41,16 @@ const profile = new mongoose.Schema({
 });
 
 
+const Quetionarre_schema  = new mongoose.Schema({
+    name : {type : String,defualt:"dir101"}, // its gonna be the name or email
+    number : {type: Number,defualt: 5} ,// number of quetions
+    description : {type :String ,defualt : "This is a sample form, nothing has been updated yet"} ,
+    quetions :[{index : {type :Number, defualt:0} , quetiontype:{type:String,defualt:"text"}  ,value : {type:String,defualt:"This is a sample problem"} ,options: {type:Array, defualt :["option A","option b","optionC","optionD"]}}]
+
+});
+
+const Quetionarre  = connection.model('Quetionarre' , Quetionarre_schema);
+
 const googleUser = connection.model('googleUser', GuserSchema)
 
 const User = connection.model('User', UserSchema); //  normalusers

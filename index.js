@@ -19,6 +19,8 @@ const {
 
 
 app.use('/static/' , express.static( path.join( __dirname ,"/html/" )))
+
+// app.use(express.static( path.join( __dirname ,"/client/build" )))
 // static is used for client. dont try to use it in the server side.
 
   
@@ -38,17 +40,21 @@ app.get('/' , async (req,res)=>{
 });
 
 
+
 const initial_login = require('./routes/initial_login')
 app.use("/signin",initial_login);
 
 const user = require('./routes/user.js')
 app.use('/user',user)
 
-app.use('/react',(req, res, next) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
 
+const apirouter =  require('./routes/apis')
+app.use('/api',apirouter);
 
+const react = require('./routes/react');
+const router = require('./routes/initial_login');
+
+app.use('/react',react);
 app.use(errorhandler);
 
 
