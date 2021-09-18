@@ -6,9 +6,11 @@ const connection = require('../database/scripts/mongo_init')
 
 const Que = connection.models.Quetionarre;
 
+// This will give you genral info about form like name , description, number of quetions etc.
+
 router.get("/quetions/:formname/description" , (req,res)=>{
 
-        console.log(req.params.formname);
+    console.log(req.params.formname);
     Que.findOne({name : req.params.formname}).then((result)=>{
         console.log(result);
         res.send({name : result.name , number: result.number , about : result.description })
@@ -19,13 +21,15 @@ router.get("/quetions/:formname/description" , (req,res)=>{
 
 })
 
+
+// this would create a sample form with few quetions and the name you give
 router.get("/quetions/createdemo/:nametocreate",(req,res)=>{
     console.log(req.params.nametocreate);
 // this is a sample quetionare
 new Que({
     name : req.params.nametocreate,
-    quetions : [{index : 0 , type  :"text" , value : "this is testing quetions" , options : ["option1", "option2","option3","option4"]},
-                {index : 1 ,type :"number" , value  :"Choose a number from options" ,options: [1,2,3,4]}],
+    quetions : [{index : 0 , quetiontype  :"text" , value : "this is testing quetions" , options : ["option1", "option2","option3","option4"]},
+                {index : 1 ,quetiontype :"number" , value  :"Choose a number from options" ,options: [1,2,3,4]}],
     number : 2,
     description : "this is a demo form,please dont do anything about it"
 
@@ -38,7 +42,7 @@ new Que({
 
 });
 
-
+// This will take the data you submited and send you msg back resposne. if some error occured , errrr would be sent
 router.post('/quetions/submit', (req,res)=>{
 Que.save(req.submit).then((submission)=>{
     res.send(`Succefully submitted \n${submission}`)
@@ -49,6 +53,7 @@ Que.save(req.submit).then((submission)=>{
 });
 }) 
 
+//Fetch the particular quetion from the form name , id is the quetion index.
 router.get("/quetions/:formname/fetch:id" , async (req,res)=>{
 
     await Que.findOne({name  : req.params.formname , "quetions.index" : req.params.id})
